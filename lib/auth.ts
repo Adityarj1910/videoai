@@ -59,4 +59,32 @@ export const authOptions: NextAuthOptions = {
             }
         })
   ],
+  // now we need to write callback logic
+  //Callbacks are asynchronous functions you can use to control what happens when an action is performed.
+
+  //callbacks include -> signIn, redirect, session, jwt etc
+  callbacks: {
+    async jwt({token, user}){
+        if(user){
+            token.id = user.id
+        }
+        return token
+    },
+    async session({session,token}){
+        if(session.user){
+            session.user.id = token.id as string 
+        }
+        return session;
+    }
+  },
+
+  pages: {
+    signIn: "/login",
+    error: "/login"
+  },
+  session:{
+    strategy: "jwt",
+    maxAge: 30*24*60*60,
+  },
+  secret: process.env.NEXTAUTH_SECRET
 };
