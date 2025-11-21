@@ -1,11 +1,12 @@
+
 import bcrypt from "bcryptjs";
-import { connect } from "http2";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import Email from "next-auth/providers/email";
 import GitHubProvider from "next-auth/providers/github";
-import { connectToDatabse } from "./db";
+import { connectToDatabase } from "./db";
 import User from "@/model/User";
+
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -29,7 +30,7 @@ export const authOptions: NextAuthOptions = {
 
                 // we have pass and valid email
                 try{
-                    await connectToDatabse() //connect to db
+                    await connectToDatabase() //connect to db
                     //get the user mathcing to the email 
                     const user = await User.findOne({email: credentials.email})
                 // check if user exist
