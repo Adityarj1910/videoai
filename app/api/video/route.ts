@@ -1,6 +1,6 @@
 //create endpoint for video
 import { authOptions } from "@/lib/auth";
-import { connectToDatabse } from "@/lib/db";
+import { connectToDatabase } from "@/lib/db";
 // import { Video } from "@imagekit/next";
 import Video, { IVideo, VIDEO_DIMESNIONS } from "@/model/Video";
 import { error } from "console";
@@ -10,7 +10,7 @@ import { NextRequest, NextResponse } from "next/server";
 //GET function to get all videos (for all users, logged-in or guest user)
 export async function GET(){
     try {
-        await connectToDatabse(); //connect to db
+        await connectToDatabase(); //connect to db
 
         //get all videos and sort by creation time.
         const Videos = await Video.find({}).sort({createdAt:-1}).lean(); //makes mongo query lighter and faster
@@ -44,7 +44,7 @@ export async function POST(request:NextRequest){
             )
         }
 
-        await connectToDatabse()
+        await connectToDatabase()
 
         //read the data sent by the client and store in body
         const body: IVideo = await request.json() //all data from request -> use video interface
