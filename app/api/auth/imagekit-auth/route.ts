@@ -8,7 +8,8 @@ export async function GET() {
     // If the user is not authenticated, you can return an error response
 
     try {
-            const { token, expire, signature } = getUploadAuthParams({ //upload credentials
+            // const { token, expire, signature } = getUploadAuthParams({ //upload credentials
+            const authenticationParameters = getUploadAuthParams({
                 privateKey: process.env.IMAGEKIT_PRIVATE_KEY as string, // Never expose this on client side
                 publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY as string,
                 // expire: 30 * 60, // Optional, controls the expiry time of the token in seconds, maximum 1 hour in the future
@@ -16,9 +17,10 @@ export async function GET() {
             })
         
             return Response.json({ 
-                token, 
-                expire, 
-                signature, 
+                // token, 
+                // expire, 
+                // signature, 
+                authenticationParameters,
                 publicKey: process.env.NEXT_PUBLIC_PUBLIC_KEY 
             })
     } catch (error) {

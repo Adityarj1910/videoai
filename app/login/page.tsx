@@ -1,7 +1,6 @@
 "use client"
 import React, {useState} from "react"
 import { useRouter } from "next/navigation";
-import { ReactFormState } from "react-dom/client";
 import { signIn } from "next-auth/react";
 // import { error } from "console";
 
@@ -22,13 +21,12 @@ export default function LoginPage(){
         if(result?.error){
             console.log(result.error);
         }else{
-            router.push("/")
+            router.push("/");
         }
     };
 
-    return (<div 
-    // style="display: flex; align-items: center; height: 200px;"
-    > 
+    return (
+    <div> 
             <h1>Login Page</h1>
             <form onSubmit={handleSubmit}>
                 <input

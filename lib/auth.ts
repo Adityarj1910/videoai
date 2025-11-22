@@ -2,8 +2,6 @@
 import bcrypt from "bcryptjs";
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import Email from "next-auth/providers/email";
-import GitHubProvider from "next-auth/providers/github";
 import { connectToDatabase } from "./db";
 import User from "@/model/User";
 
@@ -73,10 +71,10 @@ export const authOptions: NextAuthOptions = {
     },
     async session({session,token}){
         if(session.user){
-            session.user.id = token.id as string 
+            session.user.id = token.id as string;
         }
         return session;
-    }
+    },
   },
 
   pages: {
